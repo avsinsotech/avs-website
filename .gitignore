@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.env.local
+bin/
+obj/
+backend/AvsWebsite.Api/wwwroot/uploads/*
+!backend/AvsWebsite.Api/wwwroot/uploads/.gitkeep
+appsettings.Production.json
+*.user
+.vs/

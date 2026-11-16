@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Windows / IIS: reverse-proxy www.avsinsotech.com to the Next.js server on 127.0.0.1:3000.
+     Requires IIS URL Rewrite + Application Request Routing (ARR) with "Enable proxy" turned on.
+     Rename to web.config and place in the IIS site's physical folder (an empty folder is fine). -->
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Force HTTPS" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions><add input="{HTTPS}" pattern="off" /></conditions>
+          <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
+        </rule>
+        <rule name="NextJs" stopProcessing="true">
+          <match url="(.*)" />
+          <action type="Rewrite" url="http://127.0.0.1:3000/{R:1}" />
+          <serverVariables><set name="HTTP_X_FORWARDED_PROTO" value="https" /></serverVariables>
+        </rule>
+      </rules>
+    </rewrite>
+    <httpProtocol><customHeaders><add name="Strict-Transport-Security" value="max-age=31536000; includeSubDomains" /></customHeaders></httpProtocol>
+  </system.webServer>
+</configuration>

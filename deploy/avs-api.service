@@ -1,0 +1,18 @@
+# /etc/systemd/system/avs-api.service  (Linux deployment of the ASP.NET Core API)
+[Unit]
+Description=AVS Website API (ASP.NET Core)
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/avs-api
+ExecStart=/usr/bin/dotnet /var/www/avs-api/AvsWebsite.Api.dll --urls http://127.0.0.1:5080
+Restart=always
+RestartSec=5
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+# Secrets – prefer an EnvironmentFile with chmod 600:
+EnvironmentFile=/etc/avs-api.env
+
+[Install]
+WantedBy=multi-user.target
