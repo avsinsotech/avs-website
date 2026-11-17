@@ -3,12 +3,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { LayoutDashboard, Inbox, Package, FolderTree, Layers, Newspaper, HelpCircle, Image as ImageIcon, Home, Building2, Search, LogOut, Menu, ExternalLink } from 'lucide-react';
+import { LayoutDashboard, Inbox, Package, FolderTree, Layers, Newspaper, HelpCircle, Image as ImageIcon, Home, Building2, Search, LogOut, Menu, ExternalLink, MessageSquare } from 'lucide-react';
 import { auth, isDemo, adminApi } from '@/lib/adminApi';
 
 const nav = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/leads', label: 'Enquiries & Demos', icon: Inbox },
+  { section: 'Banking Automation' },
+  { href: '/admin/whatsapp', label: 'WhatsApp Automation', icon: MessageSquare },
   { section: 'Content' },
   { href: '/admin/settings/homepage', label: 'Homepage', icon: Home },
   { href: '/admin/settings/company', label: 'Company & Contact', icon: Building2 },
